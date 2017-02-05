@@ -2,7 +2,31 @@
   layout: default
   title: 席超的博客
 ---
-<h2>最新文章</h2>
+<h2><a name="latest" id="latest">最新文章</a></h2>
+<ul>
+    {% for post in site.posts %}
+    <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+<h2><a name="spring" id="spring">Spring</a></h2>
+<ul>
+    {% for post in site.posts %}
+    <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+<h2><a name="hibernate" id="hibernate">Hibernate</a></h2>
+<ul>
+    {% for post in site.posts %}
+    <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+<h2><a name="mybatis" id="mybatis">Mybatis</a></h2>
+<ul>
+    {% for post in site.posts %}
+    <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+<h2><a name="hadoop" id="hadoop">Hadoop</a></h2>
 <ul>
     {% for post in site.posts %}
     <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
