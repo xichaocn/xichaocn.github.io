@@ -16,6 +16,9 @@ body {
 .theme-showcase .navbar .container {
   width: auto;
 }
+.navFont {
+	font-family:"Comic Sans MS", cursive, LiSu, sans-serif;
+}
 
 /*
  * Footer
