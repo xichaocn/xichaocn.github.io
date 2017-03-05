@@ -29,4 +29,5 @@ code {
     z-index: 9000;
     top: 100%;
     margin-top: -100px;
+	display:none;
 }
