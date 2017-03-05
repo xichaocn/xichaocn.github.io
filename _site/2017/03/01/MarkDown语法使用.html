@@ -80,11 +80,11 @@
 </blockquote>
 
 <hr />
-<p>##一、定义
-　　Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<br />
+<h2 id="一定义">一、定义</h2>
+<p>　　Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。<br />
 　　John Gruber 在 2004 年创造了 Markdown 语言，在语法上有很大一部分是跟 Aaron Swartz 共同合作的。这个语言的目的是希望大家使用“易于阅读、易于撰写的纯文字格式，并选择性的转换成有效的 XHTML (或是HTML)”。 其中最重要的设计是可读性，也就是说这个语言应该要能直接在字面上的被阅读，而不用被一些格式化指令标记 (像是 RTF 与 HTML)。 因此，它是现行电子邮件标记格式的惯例，虽然它也借鉴了很多早期的标记语言，如：setext、Texile、reStructuredText。 许多网站都使用 Markdown 或是其变种，例如：GitHub、reddit、Diaspora、Stack Exchange、OpenStreetMap 与 SourceForge 让用户更利于讨论。</p>
 
-<p>##二、语法</p>
+<h2 id="二语法">二、语法</h2>
 <h3 id="2-1-标题">2-1. 标题</h3>
 <p>Markdown 支持两种标题的语法，类 Setext 和类 atx 形式。<br />
 类 Setext 形式是用底线的形式，利用 = （最高阶标题）和 - （第二阶标题），例如：</p>
@@ -93,8 +93,10 @@
 =============
 
 This is an H2
-------------- 任何数量的 = 和 - 都可以有效果。&lt;br/&gt;
+-------------
 </div>
+
+<p>任何数量的 = 和 - 都可以有效果。<br /></p>
 
 <p>类 Atx 形式则是在行首插入<span class="light"> 1 到 6 个 #</span> ，对应到标题 1 到 6 阶，例如：</p>
 
@@ -102,9 +104,12 @@ This is an H2
 
 ## 这是 H2
 
-###### 这是 H6 你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 #，而行尾的 # 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：
+###### 这是 H6
+</div>
 
-# 这是 H1 #
+<p>你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 #，而行尾的 # 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：</p>
+
+<div class="highlighter-rouge"># 这是 H1 #
 
 ## 这是 H2 ##
 
@@ -120,22 +125,29 @@ This is an H2
 &gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 &gt; 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-&gt; id sem consectetuer libero luctus adipiscing. Markdown 也允许你偷懒只在&lt;span class="light"&gt;整个段落的第一行最前面加上 &gt; &lt;/span&gt;：
+&gt; id sem consectetuer libero luctus adipiscing.
+&gt;  Markdown 也允许你偷懒只在&lt;span class="light"&gt;整个段落的第一行最前面加上 &gt; &lt;/span&gt;：
 
 &gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
 Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing. 区块引用可以&lt;span class="light"&gt;嵌套&lt;/span&gt;（例如：引用内的引用），只要根据层次加上不同数量的 &gt; ：
+id sem consectetuer libero luctus adipiscing.
+</div>
 
-&gt; This is the first level of quoting.
+<p>区块引用可以<span class="light">嵌套</span>（例如：引用内的引用），只要根据层次加上不同数量的 &gt; ：</p>
+
+<div class="highlighter-rouge">&gt; This is the first level of quoting.
 &gt;
 &gt; &gt; This is nested blockquote.
 &gt;
-&gt; Back to the first level. 引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：
+&gt; Back to the first level.
+</div>
 
-&gt; ## 这是一个标题。
+<p>引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</p>
+
+<div class="highlighter-rouge">&gt; ## 这是一个标题。
 &gt; 
 &gt; 1.   这是第一行列表项。
 &gt; 2.   这是第二行列表项。
