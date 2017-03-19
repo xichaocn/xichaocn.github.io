@@ -1,5 +1,10 @@
 .light {
-	color:#d44950;
+	margin: 0 2px;
+	padding: 2px 5px;
+	color:#CE2323;
+	background-color: rgba(255,58,71,.03);
+	border-radius: 3px;
+	font-family: Menlo,Consolas,Arial,sans-serif;
 	#text-decoration:underline;
 }
 a {
@@ -10,14 +15,23 @@ a {
 body{
 	font-size:15px;
 	#background-color:#d7ccc8;
-	background-color:#F9F9F5;
+	#background-color:#F9F9F5;
 	line-height:200%;
 }
 
 pre {  
     background-color:inherit;
-	bolder:2px #000 solid;
+	border: #bbb dashed 1px;
 }
+
+h1 {
+	padding-bottom: 20px;
+}
+
+hr {
+	border-top:1px solid #754d4d;
+}
+
 
 code {
 	background-color:inherit;
