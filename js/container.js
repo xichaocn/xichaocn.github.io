@@ -3,23 +3,32 @@ SyntaxHighlighter.defaults['toolbar'] = false;
 SyntaxHighlighter.all();
 
 $(function(){
-    var lastIdx;//上一次标题
-    var thisIdx;//本次标题
+    var lastIdx;//上一次标题索引，如H2.1.1
+    var thisIdx;//本次标题索引
     var allIdxArr = new Array(0,0,0,0,0,0);//用于标识是否存在H1至H6
+    //按链表结构存储标题对象，属性有：
+    // tid标题ID、pre上一个标题对象、next下一个标题对象、diffGap与上一个标题差异代数
+    // 另外根节点还会多一个size总标题数
+    var rootTitle = new TitleNode(1, null, null, 0);//根标题对象
+    rootTitle.setSize(0);
+    var lastTitle = rootTitle;//上一个标题对象
+    var thisTitle = rootTitle;//本次标题对象
     $(".autoHead").each(function(){
         var tagName = $(this).prop("tagName");
         allIdxArr[parseInt(tagName.charAt(1)) - 1] = 1;
         if(null == lastIdx) {
             thisIdx = tagName + "." + 1;
-            lastIdx = thisIdx;
+            rootTitle.setSize(1);
         } else {
             var lastArr = lastIdx.split(".");
             //根据标签名判断是否同级标签
             if(tagName == lastArr[0]){//本次和上次是兄弟标签
                 thisIdx = lastIdx.substring(0, lastIdx.lastIndexOf(".") + 1)
                     + (parseInt(lastArr[lastArr.length - 1]) + 1);
+                thisTitle = new TitleNode(thisIdx.substring(3), lastTitle, null, 0);
             } else if(tagName > lastArr[0]) {//本次是上次的子标签
                 thisIdx = lastIdx.replace(/H\d{1}/, tagName) + "." + 1;
+                thisTitle = new TitleNode(thisIdx.substring(3), lastTitle, null, 1);
             } else {//本次是上次的父亲（或更高）的兄弟标签
                 //判断本次和上次差几代
                 var gapCnt = 0;
@@ -35,15 +44,107 @@ $(function(){
                 thisIdx = tagName
                     + thisIdx.substring(2, thisIdx.lastIndexOf(".") + 1)
                     + (parseInt(lastArr[lastArr.length - gapCnt - 1]) + 1);
+                thisTitle = new TitleNode(thisIdx.substring(3), lastTitle, null, -gapCnt);
             }
-            lastIdx = thisIdx;
+        }
+        lastIdx = thisIdx;
+
+        //console.log(thisIdx);
+        var txt = $(this).text();
+        txt = thisIdx.substring(3) + "." + txt;
+        $(this).attr("id", thisIdx.substring(3));
+        $(this).text(txt);
+
+        thisTitle.title = txt;
+        lastTitle.next = thisTitle;
+        lastTitle = thisTitle;
+        rootTitle.setSize(rootTitle.size + 1);
+    });
+    //生成左侧文章目录
+    generateCatalog(rootTitle);
+});
+/**
+ * 标题对象，按链表结构存储
+ * @param _tId 标题ID
+ * @param _pre 上一个标题对象
+ * @param _next 下一个标题对象
+ * @param _diffGap 与上一个标题差异代数
+ * @constructor
+ */
+function TitleNode(_tId, _pre, _next, _diffGap) {
+    this.tId = _tId;
+    this.pre = _pre;
+    this.next = _next;
+    this.diffGap = _diffGap;
+}
+TitleNode.prototype.setSize = function(_size) {
+    this.size = _size;
+};
+TitleNode.prototype.toString = function() {
+    console.log("tId=" + this.tId + ", diffGap=" + this.diffGap + ", size=" + this.size + ", title=" + this.title);
+};
+
+/**
+ * 生成左侧文章目录
+ * @param rootTitle 根标题
+ */
+function generateCatalog(rootTitle) {
+    if(rootTitle.size <= 1) {
+        return;
+    }
+    var str = "<div id=\"catalog\" style=\"position: fixed;left: 0;margin-top: 50px;margin-left: -300px;\">";
+    str += "<ul style=\"list-style: none;\">";
+
+    var tmpTitle = rootTitle;
+    while(null != tmpTitle.next) {
+        if(tmpTitle.diffGap == 0) {
+            str = str
+                + "<li>"
+                + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+                + "</li>";
+        } else if (tmpTitle.diffGap > 0) {
+            str = str
+                + "<ul style=\"list-style: none;margin-left: -25px;\">"
+                    + "<li>"
+                    + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+                    + "</li>";
+        } else {
+            str = str
+                + "</ul>"
+                + "<li>"
+                + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+                + "</li>";
         }
 
-        console.log(thisIdx);
-        var txt = $(this).text();
-        $(this).text(thisIdx.substring(3) + "." + txt);
-    });
-});
+        // tmpTitle.toString();
+        tmpTitle = tmpTitle.next;
+    }
+    if(tmpTitle.diffGap == 0) {
+        str = str
+            + "<li>"
+            + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+            + "</li>";
+    } else if (tmpTitle.diffGap > 0) {
+        str = str
+            + "<ul style=\"list-style: none;margin-left: -25px;\">"
+            + "<li>"
+            + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+            + "</li>";
+    } else {
+        str = str
+            + "</ul>"
+            + "<li>"
+            + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+            + "</li>";
+    }
+
+    str += "</ul></div>";
+
+    $("#middleCon").prepend(str);
+    $("#catalog").animate({
+        marginLeft : "0"
+    }, 500);
+}
 
 $(function(){
     //$("pre").css("border","1px #bbb solid");
