@@ -89,13 +89,9 @@ TitleNode.prototype.toString = function() {
  * @param rootTitle 根标题
  */
 function generateCatalog(rootTitle) {
-    if(rootTitle.size <= 1) {
+    if(rootTitle.size <= 1 || isFromMobile()) {
         return;
     }
-
-    // console.log(screen.width + "---" + screen.availWidth);
-    alert(screen.width + "---" + screen.availWidth + "---" + document.body.clientWidth);
-    alert(navigator.userAgent + "---" + navigator.platform);
     var str = "<div id=\"catalog\" style=\"position: fixed;left: 0;margin-top: 50px;margin-left: -300px;\">";
     // str += "<div id=\"catalogBtn\" style=\"position: fixed;left: 0;margin-top: -30px;margin-left: 50px;cursor: pointer\">";
     // str += "关闭目录</div>";
@@ -142,6 +138,17 @@ function appendCatalog(tmpTitle, str) {
             + "</li>";
     }
     return str;
+}
+/**
+ * 判断是否从手机端访问
+ */
+function isFromMobile() {
+    // console.log(screen.width + "---" + screen.availWidth);
+    // alert(screen.width + "---" + screen.availWidth + "---" + document.body.clientWidth);
+    // alert(navigator.userAgent + "---" + navigator.platform);
+    return /AppleWebKit.*Mobile/i.test(navigator.userAgent)
+        || /MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent)
+        || document.body.clientWidth <= 768;
 }
 
 $(function(){
