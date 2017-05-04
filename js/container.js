@@ -92,33 +92,36 @@ function generateCatalog(rootTitle) {
     if(rootTitle.size <= 1) {
         return;
     }
+
+    // console.log(screen.width + "---" + screen.availWidth);
+    alert(screen.width + "---" + screen.availWidth + "---" + document.body.clientWidth);
     var str = "<div id=\"catalog\" style=\"position: fixed;left: 0;margin-top: 50px;margin-left: -300px;\">";
+    // str += "<div id=\"catalogBtn\" style=\"position: fixed;left: 0;margin-top: -30px;margin-left: 50px;cursor: pointer\">";
+    // str += "关闭目录</div>";
     str += "<ul style=\"list-style: none;\">";
 
     var tmpTitle = rootTitle;
     while(null != tmpTitle.next) {
-        if(tmpTitle.diffGap == 0) {
-            str = str
-                + "<li>"
-                + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
-                + "</li>";
-        } else if (tmpTitle.diffGap > 0) {
-            str = str
-                + "<ul style=\"list-style: none;margin-left: -25px;\">"
-                    + "<li>"
-                    + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
-                    + "</li>";
-        } else {
-            str = str
-                + "</ul>"
-                + "<li>"
-                + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
-                + "</li>";
-        }
+        str = appendCatalog(tmpTitle, str);
 
         // tmpTitle.toString();
         tmpTitle = tmpTitle.next;
     }
+    str = appendCatalog(tmpTitle, str);
+
+    str += "</ul></div>";
+
+    $("#middleCon").prepend(str);
+    $("#catalog").animate({
+        marginLeft : "0"
+    }, 500);
+}
+/**
+ * 拼接左侧目录结构
+ * @param tmpTitle
+ * @param str
+ */
+function appendCatalog(tmpTitle, str) {
     if(tmpTitle.diffGap == 0) {
         str = str
             + "<li>"
@@ -137,13 +140,7 @@ function generateCatalog(rootTitle) {
             + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
             + "</li>";
     }
-
-    str += "</ul></div>";
-
-    $("#middleCon").prepend(str);
-    $("#catalog").animate({
-        marginLeft : "0"
-    }, 500);
+    return str;
 }
 
 $(function(){
