@@ -1,0 +1,68 @@
+html{
+    height: 100%;
+}
+body {
+    *background: #222;
+    background-image: url("/images/background.jpg");
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #aaffaa;
+}
+.table{
+    display: table;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.table .table-cell{
+    display: table-cell;
+    vertical-align: middle;
+    font-family:"Comic Sans MS", cursive, LiSu, sans-serif;
+}
+.table .table-cell .name{
+    margin-top: 20px;
+    font-size: 60px;
+}
+.table .table-cell .description{
+    margin-top: -10px;
+    font-size: 30px;
+}
+.table .table-cell .awesome{
+    margin-top: 100px;
+    font-size: 30px;
+    color: #a6e1ec;
+}
+.table .table-cell .awesome i{
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    margin-left: 30px;
+    border: 3px solid #a6e1ec;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.table .table-cell .awesome i:first-child{
+    margin-left: 0;
+}
+.table .table-cell .wechat{
+    margin-top: 50px;
+    display: none;
+}
+.table .table-cell .wechat img{
+    width: 150px;
+    height: 150px;
+}
+.headImg {
+    height:130px;
+    width:130px;
+    border:5px solid #985f0d;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.headImg.shadow{
+    box-shadow: 0 0 30px #4cae4c
+}

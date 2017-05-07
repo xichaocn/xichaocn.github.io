@@ -156,7 +156,7 @@ $(function(){
     $("code").css("border","none");
 
     var topPosition = "<div id='top'></div>"; //定义顶部锚点的标签
-    var goToTopButton = "<div id='goToTop' class='backtop'><a href='#'><img src='/images/backTop.png' alt='回到顶部'/></a></div>";  //定义按钮标签
+    var goToTopButton = "<div id='goToTop' class='backtop'><a href='#'><img src='/images/back-top.png' alt='回到顶部'/></a></div>";  //定义按钮标签
     $("body").prepend(topPosition); //在container的div最前面加上锚点标签
     $("body").append(goToTopButton); //在container的div最后面加上按钮标签
     if ($(window).scrollTop() < 1) {
