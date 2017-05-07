@@ -5,6 +5,7 @@ $(function(){
         }).mouseleave(function(){
             $(this).removeAttr("style");
         });
+        var wechatTimeout;
         switch (index) {
             case 0 :
                 $(this).click(function(){
@@ -23,7 +24,13 @@ $(function(){
                 break;
             case 3 :
                 $(this).click(function(){
+                    if(wechatTimeout) {
+                        clearTimeout(wechatTimeout);
+                    }
                     $(".wechat").toggle("slow");
+                    wechatTimeout = setTimeout(function(){
+                        $(".wechat").hide("slow");
+                    }, 5000);
                 });
                 break;
             default :

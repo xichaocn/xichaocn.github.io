@@ -5,7 +5,6 @@
 	background-color: rgba(255,58,71,.03);
 	border-radius: 3px;
 	font-family: Menlo,Consolas,Arial,sans-serif;
-	#text-decoration:underline;
 }
 a {
 	color:#08c;
@@ -14,8 +13,6 @@ a {
 
 body{
 	font-size:15px;
-	#background-color:#d7ccc8;
-	#background-color:#F9F9F5;
 	line-height:200%;
 }
 
