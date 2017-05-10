@@ -122,19 +122,19 @@ function appendCatalog(tmpTitle, str) {
     if(tmpTitle.diffGap == 0) {
         str = str
             + "<li>"
-            + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+            + "<a class=\"catalog\" href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
             + "</li>";
     } else if (tmpTitle.diffGap > 0) {
         str = str
             + "<ul style=\"list-style: none;margin-left: -25px;\">"
             + "<li>"
-            + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+            + "<a class=\"catalog\" href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
             + "</li>";
     } else {
         str = str
             + "</ul>"
             + "<li>"
-            + "<a href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
+            + "<a class=\"catalog\" href=\"#" + tmpTitle.tId + "\">" + tmpTitle.title + "</a>"
             + "</li>";
     }
     return str;

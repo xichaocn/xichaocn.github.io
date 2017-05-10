@@ -43,3 +43,12 @@ code {
     margin-top: -100px;
 	display:none;
 }
+
+a.catalog{
+	color: #3c763d;
+	text-decoration: none;
+}
+a:hover.catalog{
+	font-size: 17px;
+	color: darkorange;
+}
