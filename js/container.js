@@ -195,11 +195,11 @@ function handleScroll(hash){
     }, 500);
 }
 $(function(){
-    if(location.hash){
-        setTimeout(function(){
-            handleScroll(location.hash)
-        },100);
-    }
+    // if(location.hash){
+    //     setTimeout(function(){
+    //         handleScroll(location.hash)
+    //     },100);
+    // }
     $("a[href^='#']").click(function(){
         handleScroll(this.hash);
     });
