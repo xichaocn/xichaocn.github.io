@@ -149,35 +149,58 @@ function isFromMobile() {
 }
 
 $(function(){
-    //$("pre").css("border","1px #bbb solid");
     $("code").css("border","none");
 
-    var topPosition = "<div id='top'></div>"; //定义顶部锚点的标签
     var goToTopButton = "<div id='goToTop' class='backtop'><a href='#'><img src='/images/back-top.png' alt='回到顶部'/></a></div>";  //定义按钮标签
-    $("body").prepend(topPosition); //在container的div最前面加上锚点标签
     $("body").append(goToTopButton); //在container的div最后面加上按钮标签
-    if ($(window).scrollTop() < 1) {
-        $("#goToTop").hide();  //滚动条距离顶端的距离小于showDistance是隐藏goToTop按钮
+    var showInstance = 600;
+    var $goToTop = $("#goToTop");
+    if ($(window).scrollTop() < showInstance) {
+        $goToTop.hide();  //滚动条距离顶端的距离小于showDistance是隐藏goToTop按钮
     }
     var scroll_timer;
     var displayed = false;
     var $window = $(window);
-    var top = $("#top").position().top + 600;
-
     var showBackTop = function () {
         window.clearTimeout(scroll_timer);
         scroll_timer = window.setTimeout(function () {
-            if ($window.scrollTop() <= top) {
+            if ($window.scrollTop() <= showInstance) {
                 displayed = false;
-                $("#goToTop").fadeOut(400);
+                $goToTop.fadeOut(400);
             } else if (displayed == false) { //show if scrolling down
                 displayed = true;
-                $("#goToTop").stop(true, true).show().click(function () {
-                    $("#goToTop").fadeOut(300);
+                $goToTop.stop(true, true).show().click(function () {
+                    $goToTop.fadeOut(300);
                 });
             }
         }, 500);
     };
     showBackTop();
     $window.scroll(showBackTop);
+});
+
+/**
+ * 处理页面滚动
+ * 包括点击左侧导航、点击回到顶部按钮、刷新页面的滚动
+ * @param hash
+ */
+function handleScroll(hash){
+    var target = document.getElementById(hash.slice(1));
+    var targetOffset = 0;
+    if (target) {
+        targetOffset = $(target).offset().top-60;
+    }
+    $("html,body").animate({
+        scrollTop: targetOffset
+    }, 500);
+}
+$(function(){
+    if(location.hash){
+        setTimeout(function(){
+            handleScroll(location.hash)
+        },100);
+    }
+    $("a[href^='#']").click(function(){
+        handleScroll(this.hash);
+    });
 });
